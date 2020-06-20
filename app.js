@@ -12,15 +12,16 @@ let app = express();
 
 // Mongoose
 let mongoose = require('mongoose');
-let mongoDB = 'mongodb://127.0.0.1:27017/local_library'
+let mongoDB = 'mongodb://127.0.0.1:27017/local_library';
 
 mongoose.connect("mongodb://127.0.0.1:27017/local_library", {
-  useNewUrlParser: true,
-  "auth": { "authSource": "admin" },
-  "user": "root",
-  "pass": "rootpassword"
+    "useNewUrlParser": true,
+    "auth": {"authSource": "admin"},
+    "user": "root",
+    "pass": "rootpassword",
+    "useUnifiedTopology": true
 });
-mongoose.connect(mongoDB, { useNewUrlParser: true });
+mongoose.connect(mongoDB, {useNewUrlParser: true});
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
@@ -30,7 +31,7 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -39,12 +40,12 @@ app.use('/users', usersRouter);
 app.use('/catalog', catalogRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
