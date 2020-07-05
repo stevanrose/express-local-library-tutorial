@@ -21,7 +21,6 @@ mongoose.connect(mongoDB, {
     "pass": "rootpassword",
     "useUnifiedTopology": true
 });
-mongoose.connect(mongoDB, {useNewUrlParser: true});
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
